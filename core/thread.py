@@ -106,7 +106,7 @@ class Thread:
             log_url = f'{self.bot.config.log_url}/logs/{log_data["key"]}'
         else:
             log_url = f"https://logs.modmail.tk/" \
-                      f"{log_data['user_id']}/{log_data['key']}"
+                      f"{log_data['key']}"
 
         user = self.recipient.mention if self.recipient else f'`{self.id}`'
 
@@ -377,7 +377,7 @@ class ThreadManager:
                 if message.embeds:
                     em = message.embeds[0]
                     # TODO: use re.search instead
-                    matches = re.findall(r'User ID: (\d+)', em.footer.text)
+                    matches = re.findall(r'User ID: (\d+)', str(em.footer.text))
                     if matches:
                         user_id = int(matches[0])
                         break
