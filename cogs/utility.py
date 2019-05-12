@@ -38,12 +38,17 @@ class Utility:
 
         prefix = self.bot.prefix
 
+        def perms_required(cmd):
+            for c in cmd.checks:
+                return getattr(c, 'permission_level', 0)
+            return 0
+
         fmts = ['']
         for cmd in sorted(self.bot.commands,
-                          key=lambda cmd: cmd.qualified_name):
+                          key=lambda cmd: perms_required(cmd)):
             if cmd.instance is cog and not cmd.hidden:
                 new_fmt = f'`{prefix + cmd.qualified_name}` '
-                perm_level = next(getattr(c, 'permission_level', None) for c in cmd.checks)
+                perm_level = perms_required(cmd)
                 if perm_level is not None:
                     new_fmt = f'`[{perm_level}] {prefix + cmd.qualified_name}` '
 
@@ -64,12 +69,16 @@ class Utility:
             )
 
             embed.add_field(name='Commands', value=fmt)
-            embed.set_author(name=cog.__class__.__name__ + ' - Help',
+
+            continued = ' (Continued)' if len(embeds) > 0 else ''
+
+            embed.set_author(name=cog.__class__.__name__ + ' - Help' + continued,
                              icon_url=ctx.bot.user.avatar_url)
 
             embed.set_footer(text=f'Type "{prefix}help command" '
                                   'for more info on a command.')
             embeds.append(embed)
+            
         return embeds
 
     async def format_command_help(self, cmd):
@@ -123,7 +132,7 @@ class Utility:
 
         choices = set()
 
-        for name, c in self.bot.all_commands:
+        for name, c in self.bot.all_commands.items():
             if not c.hidden:
                 choices.add(name)
 
@@ -175,8 +184,11 @@ class Utility:
     async def changelog(self, ctx):
         """Show a paginated changelog of the bot."""
         changelog = await Changelog.from_url(self.bot)
-        paginator = PaginatorSession(ctx, *changelog.embeds)
-        await paginator.run()
+        try:
+            paginator = PaginatorSession(ctx, *changelog.embeds)
+            await paginator.run()
+        except:
+            await ctx.send(changelog.CHANGELOG_URL)
 
     @commands.command(aliases=['bot', 'info'])
     @checks.has_permissions(PermissionLevel.REGULAR)
@@ -899,7 +911,7 @@ class Utility:
         elif user_or_role in {'everyone', 'all'}:
             value = -1
         else:
-            raise commands.UserInputError('Invalid user or role.')
+            raise commands.BadArgument(f'User or Role "{user_or_role}" not found')
 
         await self.bot.update_perms(self.bot.all_commands[command].name, value)
         embed = Embed(
@@ -927,7 +939,7 @@ class Utility:
         elif user_or_role in {'everyone', 'all'}:
             value = -1
         else:
-            raise commands.UserInputError('Invalid user or role.')
+            raise commands.BadArgument(f'User or Role "{user_or_role}" not found')
 
         await self.bot.update_perms(PermissionLevel[level.upper()], value)
         embed = Embed(
@@ -963,7 +975,7 @@ class Utility:
         elif user_or_role in {'everyone', 'all'}:
             value = -1
         else:
-            raise commands.UserInputError('Invalid user or role.')
+            raise commands.BadArgument(f'User or Role "{user_or_role}" not found')
 
         await self.bot.update_perms(self.bot.all_commands[command].name, value, add=False)
         embed = Embed(
@@ -991,7 +1003,7 @@ class Utility:
         elif user_or_role in {'everyone', 'all'}:
             value = -1
         else:
-            raise commands.UserInputError('Invalid user or role.')
+            raise commands.BadArgument(f'User or Role "{user_or_role}" not found')
 
         await self.bot.update_perms(PermissionLevel[level.upper()], value, add=False)
         embed = Embed(
@@ -1011,7 +1023,7 @@ class Utility:
         elif user_or_role in {'everyone', 'all'}:
             value = -1
         else:
-            raise commands.UserInputError('Invalid user or role.')
+            raise commands.BadArgument(f'User or Role "{user_or_role}" not found')
 
         cmds = []
         levels = []
