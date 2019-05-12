@@ -8,7 +8,9 @@
   <a href="https://heroku.com/deploy?template=https://github.com/kyb3r/modmail">
     <img src="https://img.shields.io/badge/deploy_to-heroku-997FBC.svg?style=for-the-badge">
   </a>
-  
+  <a href="https://github.com/kyb3r/modmail/">	
+    <img src="https://api.modmail.tk/badges/instances.svg" alt="Bot instances">	
+  </a>
   <a href="https://discord.gg/j5e9p8w">
     <img src="https://img.shields.io/discord/515071617815019520.svg?style=for-the-badge&colorB=7289DA" alt="Support">
   </a>
@@ -22,7 +24,6 @@
   </a>
 </div>
 
----
 
 ## How Does Modmail Work?
 
@@ -36,19 +37,12 @@ Currently, the easiest and fastest way to set up the bot is by using Heroku, whi
 
 Interactive installation: [**https://taaku18.github.io/modmail/installation**](https://taaku18.github.io/modmail/installation)
 
----
 
 # Notable Features
 
 ## Customizability
 
-Modmail has a range of configuration variables that you can dynamically alter with the `?config` command. You can use them to change the different aspects of the bot, for example, the embed color, responses, reactions, status, etc. Snippets and custom command aliases are also supported. Snippets are shortcuts for predefined messages that you can send. Add or remove snippets with the `?snippets` command. The level of customization is ever growing thanks to our exceptional contributors.
-
-## Linked Messages
-
-<img src="https://i.imgur.com/6L9aaNw.png" align="right" height="350">
-
-Have you sent something with the `?reply` command by accident? Don't fret, you can delete your original message, and the bot will automatically delete the corresponding message sent to the recipient of the thread!  You can also use the `?edit` command to edit a message you sent.
+Modmail has a range of configuration variables that you can dynamically alter with the `?config` command. You can use them to change the different aspects of the bot, for example, the embed color, responses, reactions, status, etc. Snippets and custom command aliases are also supported. The level of customization is ever growing thanks to our exceptional contributors.
 
 ## Thread Logs
 
