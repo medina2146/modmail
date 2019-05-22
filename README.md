@@ -27,9 +27,13 @@
 
 ## What is Modmail?
 
+
+<img src='https://i.imgur.com/VWDaQ37.png' align='center' width=300>
+
 Modmail's core functionality provides an efficient communications interface between server members and staff. When a member sends a direct message to the bot, a channel is created within an isolated category for that member. This channel is where messages will be relayed and where any available staff member can respond to that user.
 
 ## Features
+
 
 * **Highly Customisable**
   * Bot activity, prefix, category, log channel, etc.
@@ -78,6 +82,6 @@ $ python3 bot.py
 
 ## Contributing
 
-This project is licenced under MIT. If you have any new ideas, create an issue or a pull request. Contributions to Modmail are always welcome, whether it be improvements to the documentation or new functionality, please feel free make the change.
+This project is licenced under MIT. Contributions to Modmail are always welcome, whether it be improvements to the documentation or new functionality, please feel free make the change. Check out our contribution [guidelines](https://github.com/kyb3r/modmail/blob/master/CONTRIBUTING.md) before you get started. 
 
 This bot is open source and always will be. If you like this project and would like to show your appreciation, heres the link for our **[Patreon](https://www.patreon.com/kyber)**. 
